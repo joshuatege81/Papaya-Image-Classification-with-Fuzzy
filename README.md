@@ -21,3 +21,7 @@ Classified the papaya fruit using fuzzy method. The GUI are using website servic
 
 - Then click the 'Prediction' Button. And the result will show up. The prediction is about the ripeness of the papaya fruit and its weight in Kg
 ![3](https://user-images.githubusercontent.com/43558891/146669271-8a8cfd41-b295-4e55-903b-5f73f3db2b13.PNG)
+
+You can use your own dataset to improve the accuracy of the model.
+Don't forget to update the Parameter of fuzzy in fuzzy.py after you update the dataset. My suggestion, do the research first in fuzzy.rar to get the best accuracy. 
+You can chat me if you need guidance for the research.
