@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container pt-5">
+        <div class="card">
+            <div class="card-body">
+                <form action="">
+                    <label for="file">Upload Image Pepaya Fruit</label>
+                    <input type="file" name="file" id="file" class="form-control-file">
+                    <button class="btn btn-md mx-0 w-100 btn-primary mt-3" id="predictBtn">Prediction!</button>
+                </form>
+
+                <div id="result" class="mt-5">
+                    <h1 class="text-primary">Loading...</h1>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script>
+    let resultSection = document.getElementById('result');
+        window.addEventListener('load', function() {
+            resultSection.hidden = true;
+        })
+
+        const predictBtn = document.getElementById('predictBtn');
+
+        predictBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            const formData = new FormData();
+            const fileField = document.getElementById('file');
+
+
+            formData.append('file', fileField.files[0]);
+
+            resultSection.hidden = false;
+
+            fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                })
+
+                .then((response) => response.json())
+                .then((result) => {
+                    resultSection.innerHTML = `
+                    <h1 class ="mt-3 text-primary">Prediction Result : ${result.result}</h1>
+                    <h1>Result weight (Kg) : ${result.result1} </h1>
+                    `;
+                })
+                .catch((error) => {
+                });
+
+
+        })
+    </script>
+</body>
+
+</html>
